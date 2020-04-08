@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <button class="btn btn-secondary" [routerLink]="'new'" >New Restaurant</button>
+        <table class="table table-hover">
+            <tr>
+                <th scope="col">Restaurant</th>
+                <th scope="col">Cuisine</th>
+                <th scope="col" class="action">Actions Available</th>
+            </tr>
+            <tr *ngFor="let restaurant of restaurants">
+                <td scope="row">{{restaurant.name}}</td>
+                <td>{{restaurant.cuisine}}</td>
+                <td><button class="btn btn-warning" [routerLink]="['/restaurants/', restaurant._id]">Read Reviews</button> <button class="btn btn-warning" [routerLink]="['/restaurants/', restaurant._id, 'edit']">Update</button> <button class="btn btn-danger" (click)="onClickDelete(restaurant._id)">Delete</button></td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <router-outlet></router-outlet>
+    </div>
+</body>
+</html>

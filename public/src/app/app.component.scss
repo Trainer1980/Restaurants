@@ -1,0 +1,17 @@
+body{
+    background-image: url('../assets/3007281.jpg');
+    background-size: cover;
+    height: 100vh;
+}
+.container{
+    .title{
+        width: 250px;
+        height: 55px;
+        background-color: transparentize($color: #858585, $amount: 0);
+        h1{
+            font-size: 50px;
+            color: blue;
+            margin-left:25px;
+        }
+    }
+}

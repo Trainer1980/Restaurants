@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div *ngIf="restaurantToEdit" class="container">
+        <h2>Write a Review for:</h2>
+        <h3>{{restaurantToEdit.name}}</h3> 
+        <form (submit)="onSubmitReview()" #myForm='ngForm'>
+            <p><label for="customer">Your Name: </label>
+                <input type="text" 
+                name="newRating.customer" 
+                required
+                minlength="3"
+                [(ngModel)]="newRating.customer" 
+                #customer="ngModel"></p>
+                <div *ngIf="customer.invalid" class="alert alert-danger">
+                    <div *ngIf="customer.errors.required">
+                        Customer name is required.
+                    </div>
+                    <div *ngIf="customer.errors.minlength">
+                        Customer name must be at least 3 characters long.
+                    </div>
+                </div>
+            <p><label for="rating">Rating:</label><select 
+                name="newRating.rating"  
+                required 
+                [(ngModel)]="newRating.rating"
+                #rating="ngModel">
+                <option value="5">5 stars</option>
+                <option value="4">4 stars</option>
+                <option value="3">3 stars</option>
+                <option value="2">2 stars</option>
+                <option value="1">1 star</option>
+            </select></p>
+            <div *ngIf="rating.invalid" class="alert alert-danger">
+                <div *ngIf="rating.errors.required">
+                    Rating is required.
+                </div>
+            </div>
+            <p><label for="review">Your Review: </label>
+                <textarea name="newRating.content" 
+                required
+                minlength="3"
+                [(ngModel)]="newRating.content" 
+                #content="ngModel" id="content" cols="20" rows="3"></textarea></p>
+                <div *ngIf="content.invalid" class="alert alert-danger">
+                    <div *ngIf="content.errors.required">
+                        Review is required.
+                    </div>
+                    <div *ngIf="content.errors.minlength">
+                        Review must be at least 3 characters long.
+                    </div>
+                </div>
+                <button type="button" class="btn btn-primary" [routerLink]="['/restaurants']">Cancel</button>
+                <input class="btn btn-success" type="submit" [disabled]="!myForm.form.valid" value="Review">
+            </form>
+    </div>
+    
+</body>
+</html>

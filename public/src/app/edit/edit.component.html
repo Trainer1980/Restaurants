@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>Edit Restaurant:</h2>
+        <h3>{{restaurantToEdit.name}}</h3>
+        <form (submit)="onSubmitEdit()" #myForm='ngForm'>
+            <p><label for="name">Name: </label>
+                <input type="text" name="restaurantToEdit.name" 
+                required
+                minlength="3"
+                [(ngModel)]="restaurantToEdit.name" 
+                #name="ngModel"
+                [value]="restaurantToEdit.name"></p>
+                <div *ngIf="name.invalid" class="alert alert-danger">
+                    <div *ngIf="name.errors.required">
+                        Restaurant name is required.
+                    </div>
+                    <div *ngIf="name.errors.minlength">
+                        Restaurant name must be at least 3 characters long.
+                    </div>
+                </div>
+            <p><label for="cuisine">Cuisine: </label>
+                <input type="text" name="restaurantToEdit.cuisine" 
+                required
+                minlength="3"
+                [(ngModel)]="restaurantToEdit.cuisine" 
+                #cuisine="ngModel"
+                [value]="restaurantToEdit.cuisine"></p>
+                <div *ngIf="cuisine.invalid" class="alert alert-danger">
+                    <div *ngIf="cuisine.errors.required">
+                        Cuisine name is required.
+                    </div>
+                    <div *ngIf="cuisine.errors.minlength">
+                        Cuisine name must be at least 3 characters long.
+                    </div>
+                </div>
+            <button type="button" class="btn btn-primary" [routerLink]="['/restaurants']">Cancel</button>
+            <input class="btn btn-success" type="submit" [disabled]="!myForm.form.valid" value="Update">
+        </form>
+    </div>
+</body>
+</html>
